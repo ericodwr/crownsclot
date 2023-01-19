@@ -1,4 +1,5 @@
 import React from 'react';
+import SignupForm from '../../components/sign-up-form/SignupForm';
 
 import {
   signInWithGooglePopup,
@@ -15,6 +16,7 @@ const Signin = () => {
     <div>
       <h1>Sign in Page</h1>
       <button onClick={logGoogleUser}>Sign in with google popup</button>
+      <SignupForm />
     </div>
   );
 };
