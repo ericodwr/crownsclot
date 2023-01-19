@@ -4,6 +4,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from 'firebase/auth';
 
 // function to create db
@@ -75,6 +76,8 @@ export const createUserDocumentFromAuth = async (
   return userDocRef;
 };
 
+// email / password
+
 // Create user by email/password
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   // check if email and password exist
@@ -84,4 +87,15 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
 
   // returning function from firebase
   return await createUserWithEmailAndPassword(auth, email, password);
+};
+
+// Sign in by email / password
+export const signInAuthWithEmailAndPassword = async (email, password) => {
+  // check if email and password exist
+  if (!email || !password) {
+    return;
+  }
+
+  // returning function from firebase
+  return await signInWithEmailAndPassword(auth, email, password);
 };
