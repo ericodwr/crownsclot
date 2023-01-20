@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import {
-  createUserDocumentFromAuth,
   signInWithGooglePopup,
   signInAuthWithEmailAndPassword,
 } from '../../utils/firebase/firebase.utils';
@@ -17,8 +16,11 @@ const defaultFormField = {
 };
 
 const SignInForm = () => {
+  // use state
   const [formFields, setFormFields] = useState(defaultFormField);
   const { email, password } = formFields;
+
+  // use context
 
   // handle changing on form based on their values
   const handleChange = (e) => {
@@ -33,8 +35,7 @@ const SignInForm = () => {
 
     // firebase
     try {
-      const response = await signInAuthWithEmailAndPassword(email, password);
-      console.log(response);
+      await signInAuthWithEmailAndPassword(email, password);
 
       setFormFields(defaultFormField);
       // some error shit
@@ -55,8 +56,7 @@ const SignInForm = () => {
 
   // function for sign in from google
   const logGoogleUser = async () => {
-    const response = await signInWithGooglePopup();
-    createUserDocumentFromAuth(response.user);
+    await signInWithGooglePopup();
   };
 
   return (
