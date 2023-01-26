@@ -64,7 +64,7 @@ export const CartProvider = ({ children }) => {
   const [cartCount, setCartCount] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
 
-  // watching if cartItem did some changes then update total cart
+  // watching if cartItem did some changes then update cart
   useEffect(() => {
     const totalCart = cartItems.reduce((acc, value) => acc + value.quantity, 0);
 
