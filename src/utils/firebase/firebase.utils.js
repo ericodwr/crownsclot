@@ -74,13 +74,16 @@ export const getCategoriesAndDocuments = async () => {
 
   const querySnapShot = await getDocs(q);
 
-  const categoriesMap = querySnapShot.docs.reduce((acc, docSnapShot) => {
-    const { title, items } = docSnapShot.data();
-    acc[title.toLowerCase()] = items;
-    return acc;
-  }, []);
+  const categories = querySnapShot.docs.map((docSnapshot) =>
+    docSnapshot.data(),
+  );
+  // .reduce((acc, docSnapShot) => {
+  //   const { title, items } = docSnapShot.data();
+  //   acc[title.toLowerCase()] = items;
+  //   return acc;
+  // }, []);
 
-  return categoriesMap;
+  return categories;
 };
 
 // Create a new user to database
