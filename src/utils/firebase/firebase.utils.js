@@ -120,7 +120,7 @@ export const createUserDocumentFromAuth = async (
 
   // if user exist
   // return userAuth
-  return userDocRef;
+  return userSnapshot;
 };
 
 // email / password
@@ -153,3 +153,16 @@ export const signOutUser = async () => signOut(auth);
 // helper function tracking sign in/out
 export const onAuthStateChangedListener = (callback) =>
   onAuthStateChanged(auth, callback);
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject,
+    );
+  });
+};

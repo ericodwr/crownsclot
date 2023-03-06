@@ -2,6 +2,7 @@ import React from 'react';
 
 import Directory from '../../components/directory/Directory';
 
+
 const Home = () => {
   const categories = [
     {
@@ -31,7 +32,11 @@ const Home = () => {
     },
   ];
 
-  return <Directory categories={categories} />;
+  return (
+    <>
+      <Directory categories={categories} />
+    </>
+  );
 };
 
 export default Home;

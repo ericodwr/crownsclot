@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-import {
-  createAuthUserWithEmailAndPassword,
-  createUserDocumentFromAuth,
-} from '../../utils/firebase/firebase.utils';
+import { useDispatch } from 'react-redux';
+
+import { signUpStart } from '../../store/user/user.action';
+
 import Button from '../button/Button';
 import FormInput from '../form-input/FormInput';
 
@@ -21,6 +21,8 @@ const SignupForm = () => {
   // use state
   const [formFields, setFormFields] = useState(defaultFormField);
   const { displayName, email, password, confirmPassword } = formFields;
+
+  const dispatch = useDispatch();
 
   // handle changing on form based on their values
   const handleChange = (e) => {
@@ -41,14 +43,7 @@ const SignupForm = () => {
 
     // firebase
     try {
-      // create user with email and password
-      const { user } = await createAuthUserWithEmailAndPassword(
-        email,
-        password,
-      );
-
-      // after create user, create database on firestore
-      await createUserDocumentFromAuth(user, { displayName });
+      dispatch(signUpStart(email, password, displayName));
 
       // empty the form
       setFormFields(defaultFormField);

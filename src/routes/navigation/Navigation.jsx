@@ -2,9 +2,11 @@ import React from 'react';
 
 import { Outlet, Link } from 'react-router-dom';
 
-import { selectIsCartOpen } from '../../store/cart/cart.selector';
+import { useDispatch } from 'react-redux';
 
-import { signOutUser } from '../../utils/firebase/firebase.utils';
+import { signOutStart } from '../../store/user/user.action';
+
+import { selectIsCartOpen } from '../../store/cart/cart.selector';
 
 import { useSelector } from 'react-redux';
 
@@ -17,6 +19,9 @@ import CartDropdown from '../../components/cart-dropdown/CartDropdown';
 const Navigation = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
   const isCartOpen = useSelector(selectIsCartOpen);
+  const dispatch = useDispatch();
+
+  const signOutUser = () => dispatch(signOutStart());
 
   return (
     <>
@@ -25,6 +30,13 @@ const Navigation = () => {
           <CrownLogo className="logo" />
         </Link>
         <div className="nav-links-container">
+          <span>
+            {currentUser && (
+              <span className="username">
+                Hello, {currentUser.displayName}!
+              </span>
+            )}
+          </span>
           <Link className="nav-link" to={'/shop'}>
             Shop
           </Link>
